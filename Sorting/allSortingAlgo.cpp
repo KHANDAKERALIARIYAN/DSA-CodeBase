@@ -8,6 +8,7 @@ void printArray(int a[],int n){
     cout<<endl;
 }
 
+// bubble sort
 void bubbleSort(int a[],int n){
     for (int i = 0; i < n; i++){
         bool swapped =false;
@@ -23,6 +24,7 @@ void bubbleSort(int a[],int n){
     }   
 }
 
+// selection sort
 void selectionSort(int a[],int n){
     for (int i = 0; i < n; i++){
         int small=i;
@@ -35,6 +37,7 @@ void selectionSort(int a[],int n){
     }  
 }
 
+// insertion sort
 void insertionSort(int a[],int n){
     for(int i=1;i<n;i++){
         int current=a[i];
@@ -49,6 +52,28 @@ void insertionSort(int a[],int n){
     }
 }
 
+// quick sort
+int partition_array(int a[],int low,int high){
+    int pivot=a[high];
+    int i=low-1;
+    for (int j = low; j < high; j++){
+        if (a[j]<pivot){
+            i++;
+            swap(a[i],a[j]);
+        }
+    }
+    swap(a[i+1],a[high]);
+    return i+1;
+}
+
+void quickSort_array(int a[],int low, int high){
+    if (low<high){
+        int pivot=partition_array(a,low,high);
+        quickSort_array(a,low,pivot-1);
+        quickSort_array(a,pivot+1,high);
+    }
+}
+
 int main(){
 
     int a[]={4,7,2,8,9,76,43,111,1,89};
@@ -59,7 +84,8 @@ int main(){
 
     // bubbleSort(a,n); 
     // selectionSort(a,n); 
-    insertionSort(a,n);
+    // insertionSort(a,n);
+    quickSort_array(a,0,n-1)
     cout<<"After sorting"<<endl;    
     printArray(a,n);
     
