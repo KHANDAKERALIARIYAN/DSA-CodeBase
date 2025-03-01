@@ -23,14 +23,45 @@ void quickSort(vector<int> &arr,int startingIndex,int endingIndex){
         quickSort(arr,pivotIndex+1,endingIndex);  //right half
     }  
 }
-int main(){
-    vector<int> arr={12,31,35,8,32,17};
-    quickSort(arr,0,arr.size()-1);
 
-    for (int val : arr){
-        cout<<val<<" ";
+// other approach
+
+int partition_array(int a[],int low,int high){
+    int pivot=a[high];
+    int i=low-1;
+    for (int j = low; j < high; j++){
+        if (a[j]<pivot){
+            i++;
+            swap(a[i],a[j]);
+        }
     }
-    cout<<endl;
+    swap(a[i+1],a[high]);
+    return i+1;
+}
+
+void quickSort_array(int a[],int low, int high){
+    if (low<high){
+        int pivot=partition_array(a,low,high);
+        quickSort_array(a,low,pivot-1);
+        quickSort_array(a,pivot+1,high);
+    }
+}
+int main(){
+    // vector<int> arr={12,31,35,8,32,17};
+    // quickSort(arr,0,arr.size()-1);
+
+    // for (int val : arr){
+    //     cout<<val<<" ";
+    // }
+    // cout<<endl;
+
+    int a[]={4,7,2,8,9,76,43,111,1,89};
+    int n=sizeof(a)/sizeof(int);
+    quickSort_array(a,0,n-1);
+    for (int i = 0; i < n; i++)
+    {
+        cout<<a[i]<<" ";
+    }
     
     return 0;
 }
